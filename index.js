@@ -1,7 +1,9 @@
 const prompt = require("prompt-sync")()
 
+let ultimoID = 0
+
 const residencias = [];
-const modelo = () => {
+function modelo(id = ++ ultimoID) {
     const bairro = prompt ("Digite onde está localizada a sua residencia: ");
     const rua = prompt ("Digite  o nome da rua: ");
     const numero = prompt("Digite o número da casa: ");
@@ -21,7 +23,8 @@ const modelo = () => {
         bairro,
         rua,
         numero,
-        moradores
+        moradores,
+        id
      }
     }
     console.log("Dados invalidos! ")
@@ -37,6 +40,7 @@ const modelo = () => {
  const listarResidencia = () => {
     residencias.forEach((el, i) => {
         console.log(`${i + 1},
+            ID: ${residencias.id},
             Rua: ${el.rua},
             Bairro: ${el.bairro},
             Numero da casa: ${el.numero},
@@ -47,7 +51,9 @@ const modelo = () => {
 
  const atualizarResidencia = () => {
     listarResidencia();
-const nova = modelo(); 
+const id = prompt("ID residencia: ")
+
+    const nova = modelo(id); 
 const indice = prompt("Qual indice deseja atualizar? ") - 1
 if(nova && indice >= 0 && indice < residencias.length) {
     residencias[indice] = nova;
